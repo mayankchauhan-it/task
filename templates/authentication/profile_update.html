@@ -1,0 +1,22 @@
+
+{% extends 'base/base.html' %}
+
+{% block title %}Update Profile{% endblock %}
+
+{% block content %}
+<h2>Update Profile</h2>
+<form method="POST" action="{% url 'update_profile' %}">
+    {% csrf_token %}
+    <label for="first_name">First Name:</label>
+    <input type="text" name="first_name" id="first_name" value="{{profile_data.first_name}}">
+    <label for="last_name">Last Name:</label>
+    <input type="text" name="last_name" id="last_name" value="{{profile_data.last_name}}">
+    <label for="bio">Bio:</label>
+    <textarea name="bio" id="bio"> {{profile_data.bio}}</textarea>
+    <label for="location">Location:</label>
+    <input type="text" name="location" id="location" value="{{profile_data.location}}">
+    <button type="submit">Update</button>
+</form>
+
+<button><a href="{% url 'logout_view'%}">log out</a></button>
+{% endblock %}

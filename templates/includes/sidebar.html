@@ -1,0 +1,49 @@
+
+<nav class="pcoded-navbar">
+  <div class="navbar-wrapper">
+    <div class="navbar-brand header-logo ">
+      <a href="#" class="b-brand">
+        <div class="b-bg">
+          <i class="feather icon-command"></i>
+        </div>
+        <span class="b-title text-white font-weight-bold ">Hello Innovations</span>
+      </a>
+      <a class="mobile-menu" id="mobile-collapse" href="javascript:"><span></span></a>
+    </div>
+    <div class="navbar-content scroll-div  ">
+      <ul class="nav pcoded-inner-navbar">
+        <li class="nav-item pcoded-menu-caption text-white">
+          <label class="text-white">Menu</label>
+        </li>
+        <li data-username="dashboard Default Ecommerce CRM Analytics Crypto Project" class="nav-item {% if 'Home' in segment %}active{% endif %}">
+          {% if request.user.is_superuser %}
+          <a href="{% url 'dashboard_view'%}" class="nav-link">
+          {% else %}
+          <a href="{% url 'dashboard_view'%}" class="nav-link ">
+          {% endif %}
+            <span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext changed_color">Dashboard</span>
+          </a>
+        </li>
+
+        {% if request.user.is_authenticated %}
+        <li class="nav-item pcoded-hasmenu {% if 'addCustomer' in segment or 'customer_list' in segment %}active pcoded-trigger{% endif %}">
+          <a href="javascript:" class="nav-link "><span class="pcoded-micon"><i
+                class="feather icon-user-check"></i></span><span class="pcoded-mtext changed_color">Users</span></a>
+          <ul class="pcoded-submenu">
+            <li class="{% if 'user_list' in segment %}active{% endif %}"><a href="{% url 'user_profiles'%}" class="">User List</a></li>
+          </ul>
+        </li>
+
+        {% endif %}
+
+        <li data-username="dashboard Default Ecommerce CRM Analytics Crypto Project" class="nav-item ">
+          <a href="{% url 'logout_view'%}" class="nav-link">
+              <span class="pcoded-micon"><i class="feather icon-log-out"></i></span>
+              <span class="pcoded-mtext changed_color">Log Out</span>
+          </a>
+      </li>
+
+      </ul>
+    </div>
+  </div>
+</nav>

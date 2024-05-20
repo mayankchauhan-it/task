@@ -1,0 +1,158 @@
+{% extends 'base/dashboard-base.html' %}
+{% load static %}
+
+{% block extrastyle %}
+<style>
+    .limit-text {
+        max-width: 200px;
+        /* Set the desired maximum width for the cell */
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        cursor: pointer;
+        /* Add this if you want to indicate the cell is truncated */
+    }
+
+    .cur {
+        cursor: pointer;
+    }
+
+    /* Custom CSS for smaller textareas */
+    #id_shipping_address,
+    #id_address {
+        height: 100px;
+        /* Adjust the height as needed */
+    }
+
+    .bg-warning{
+        background-color: red !important;
+    }
+
+    .modal-xl{
+        max-width: 1200px; !important;
+    }
+
+    body.dark .modal-content {
+        background-color: #2C394B !important;
+        color: #fff !important;
+      }
+</style>
+{% endblock extrastyle %}
+
+
+
+{% block content %}
+
+<!-- Customer List -->
+<div class="header pb-6">
+    <div class="container-fluid">
+        <div class="header-body">
+            <div class="row mt-3">
+                <div class="col-md-12">
+                    <div class="card card-stats">
+                        <!-- Card body -->
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-12 d-flex align-items-center justify-content-between">
+                                    <h3 class="h2 text-danger font-weight-bold">User Details</h3>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="card-body px-0 pt-0 pb-2">
+                                <div class="table-responsive p-0">
+                                    <table id='AC_AMC_TABLE' class="table align-items-center mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th
+                                                    class="text-center text-uppercase text-secondary font-weight-bold opacity-7">
+                                                    No.
+                                                </th>
+                                                <th
+                                                    class="text-center text-uppercase text-secondary font-weight-bold opacity-7">
+                                                    User Name
+                                                </th>
+                                                
+                                                <th
+                                                    class="text-center text-uppercase text-secondary font-weight-bold opacity-7 d-none d-lg-table-cell">
+                                                    Full Name
+                                                </th>
+
+                                                <th
+                                                    class="text-center text-uppercase text-secondary font-weight-bold opacity-7 ">
+                                                    Email
+                                                </th>
+
+                                                <th
+                                                    class="text-center text-uppercase text-secondary font-weight-bold opacity-7">
+                                                    View / Edit Service
+                                                </th>
+                                                <th
+                                                    class="text-center text-uppercase text-secondary font-weight-bold opacity-7">
+                                                    Delete
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for user in all_users %}
+                                            <tr>
+                                                <td class="text-center font-weight-bold opacity-7">
+                                                    <h6 class="mb-0 text-sm">{{forloop.counter}}</h6>
+                                                </td>
+                                                <td class="text-center opacity-7">
+                                                    <h6 class="mb-0 text-sm text-secondary font-weight-bold">{{ user.username }}
+                                                    </h6>
+                                                </td>
+
+                                                <td class="text-center opacity-7 d-none d-lg-table-cell">
+                                                    <p class="text-xs font-weight-bold mb-0 ">
+                                                        {{ user.first_name|capfirst }}{{ user.last_name|capfirst }}
+                                                    </p>
+                                                </td>
+
+                                                <td class="text-center opacity-7 ">
+                                                    <p class="text-xs font-weight-bold mb-0 ">
+                                                        {{ user.email }}
+                                                    </p>
+                                                </td>
+                                                <td class="text-center font-weight-bold opacity-7">
+                                                    <a href=""
+                                                        class="btn bg-danger rounded text-white font-weight-bold text-xs cur"
+                                                        data-toggle="tooltip" data-original-title="View contract">
+                                                        <span class="badge badge-sm">View</span>
+                                                    </a>
+
+                                                    <!-- Edit Button -->
+                                                    <button id="updatecus" type="button"
+                                                        class="updatecus btn text-white font-weight-bold text-xs badge badge-md bg-danger rounded"
+                                                        data-toggle="modal" 
+                                                        data-target="#updateContractModal{{  contract.id }}">
+                                                        <span class="badge badge-md ">Edit</span>
+                                                    </button>
+
+                                                </td>
+
+                                                <!-- Delete Button  -->
+                                                <td class="text-center font-weight-bold opacity-7">
+                                                    <a href=""
+                                                        class="btn bg-danger rounded text-white font-weight-bold text-xs cur"
+                                                        data-toggle="tooltip" data-original-title="Delete user"
+                                                        onclick="return confirm('Are You Sure,You want to delete this data?');">
+                                                        <span class="badge badge-sm">Delete</span>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}
